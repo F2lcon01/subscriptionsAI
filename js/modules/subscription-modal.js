@@ -173,6 +173,29 @@ const SubscriptionModal = (function() {
             '<textarea class="form-group__input form-group__textarea" id="sub-notes" rows="2" data-i18n-placeholder="subscription.notes_placeholder" placeholder="Any additional notes...">' + _escapeHTML(data.notes || '') + '</textarea>' +
           '</div>' +
 
+          // Login Credentials
+          '<div class="form-group">' +
+            '<label class="form-group__label" data-i18n="subscription.credentials">Login Credentials (optional)</label>' +
+          '</div>' +
+          '<div class="form-row form-row--2">' +
+            '<div class="form-group">' +
+              '<label class="form-group__label" for="sub-credential-user" data-i18n="subscription.credential_username">Username / Email</label>' +
+              '<input class="form-group__input" type="text" id="sub-credential-user" data-i18n-placeholder="subscription.credential_username_placeholder" placeholder="Email or username" value="' + _escapeAttr((data.credentials && data.credentials.username) || '') + '">' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label class="form-group__label" for="sub-credential-pass" data-i18n="subscription.credential_password">Password</label>' +
+              '<div style="position:relative">' +
+                '<input class="form-group__input" type="password" id="sub-credential-pass" data-i18n-placeholder="subscription.credential_password_placeholder" placeholder="Service password" value="' + _escapeAttr((data.credentials && data.credentials.password) || '') + '">' +
+                '<button type="button" class="form-group__toggle" id="credential-pass-toggle" aria-label="Toggle password visibility">' +
+                  '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>' +
+                    '<circle cx="12" cy="12" r="3"></circle>' +
+                  '</svg>' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
           // Submit
           '<div class="modal__actions">' +
             (isEdit ?
@@ -330,6 +353,19 @@ const SubscriptionModal = (function() {
     if (deleteBtn) {
       deleteBtn.addEventListener('click', _onDelete);
     }
+
+    // Credential password toggle
+    _bindPasswordToggle('credential-pass-toggle', 'sub-credential-pass');
+  }
+
+  function _bindPasswordToggle(toggleId, inputId) {
+    var toggle = document.getElementById(toggleId);
+    var input = document.getElementById(inputId);
+    if (!toggle || !input) return;
+    toggle.addEventListener('click', function() {
+      var isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+    });
   }
 
   function _onEscape(e) {
@@ -352,6 +388,8 @@ const SubscriptionModal = (function() {
     var trialEndDate = document.getElementById('sub-trial-end').value;
     var url = document.getElementById('sub-url').value.trim();
     var notes = document.getElementById('sub-notes').value.trim();
+    var credUser = document.getElementById('sub-credential-user').value.trim();
+    var credPass = document.getElementById('sub-credential-pass').value;
 
     // Get selected category
     var activeCategory = document.querySelector('.category-btn--active');
@@ -392,7 +430,8 @@ const SubscriptionModal = (function() {
       totalCost: parseFloat(amount),
       yourShare: (subscriptionType !== 'individual' && yourShare) ? parseFloat(yourShare) : parseFloat(amount),
       icon: _selectedService ? _selectedService.icon : _getCategoryIcon(category),
-      color: _selectedService ? _selectedService.color : '#3498DB'
+      color: _selectedService ? _selectedService.color : '#3498DB',
+      credentials: { username: credUser, password: credPass }
     };
 
     try {

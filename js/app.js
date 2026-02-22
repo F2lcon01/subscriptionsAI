@@ -75,8 +75,7 @@ const App = (function() {
         SubscriptionList.render();
         break;
       case 'settings':
-        // Settings page is static for now, just translate
-        I18n.translatePage();
+        Settings.render();
         break;
     }
   }

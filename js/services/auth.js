@@ -125,6 +125,96 @@ const AuthService = (function() {
     return currentUser;
   }
 
+  /**
+   * Check if the current user signed in with email/password
+   * @returns {boolean}
+   */
+  function isEmailUser() {
+    if (!currentUser) return false;
+    return currentUser.providerData.some(function(p) {
+      return p.providerId === 'password';
+    });
+  }
+
+  /**
+   * Reauthenticate with email/password
+   * @param {string} password - Current password
+   */
+  async function reauthenticate(password) {
+    var user = auth.currentUser;
+    if (!user || !user.email) throw new Error('No user');
+    var credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
+    await user.reauthenticateWithCredential(credential);
+  }
+
+  /**
+   * Change password (requires reauthentication)
+   * @param {string} currentPassword
+   * @param {string} newPassword
+   */
+  async function changePassword(currentPassword, newPassword) {
+    await reauthenticate(currentPassword);
+    await auth.currentUser.updatePassword(newPassword);
+  }
+
+  /**
+   * Update display name
+   * @param {string} displayName
+   */
+  async function updateProfile(displayName) {
+    var user = auth.currentUser;
+    if (!user) throw new Error('No user');
+    await user.updateProfile({ displayName: displayName });
+    await db.collection('users').doc(user.uid).update({
+      name: displayName,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    currentUser = auth.currentUser;
+    var nameEl = document.getElementById('user-display-name');
+    if (nameEl) nameEl.textContent = displayName;
+  }
+
+  /**
+   * Get the user profile from Firestore
+   * @returns {Promise<Object>}
+   */
+  async function getUserProfile() {
+    var user = auth.currentUser;
+    if (!user) return null;
+    var doc = await db.collection('users').doc(user.uid).get();
+    return doc.exists ? doc.data() : null;
+  }
+
+  /**
+   * Update user profile fields in Firestore
+   * @param {Object} data - Fields to update
+   */
+  async function updateUserProfile(data) {
+    var user = auth.currentUser;
+    if (!user) throw new Error('No user');
+    data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+    await db.collection('users').doc(user.uid).update(data);
+  }
+
+  /**
+   * Delete the current user's account and all data
+   */
+  async function deleteAccount() {
+    var user = auth.currentUser;
+    if (!user) throw new Error('No user');
+
+    var subsSnapshot = await db.collection('users').doc(user.uid)
+      .collection('subscriptions').get();
+    var batch = db.batch();
+    subsSnapshot.forEach(function(doc) {
+      batch.delete(doc.ref);
+    });
+    await batch.commit();
+
+    await db.collection('users').doc(user.uid).delete();
+    await user.delete();
+  }
+
   // =============================================
   // AUTH UI RENDERING
   // =============================================
@@ -635,6 +725,12 @@ const AuthService = (function() {
     loginWithGoogle: loginWithGoogle,
     resetPassword: resetPassword,
     logout: logout,
-    getUser: getUser
+    getUser: getUser,
+    isEmailUser: isEmailUser,
+    changePassword: changePassword,
+    updateProfile: updateProfile,
+    getUserProfile: getUserProfile,
+    updateUserProfile: updateUserProfile,
+    deleteAccount: deleteAccount
   };
 })();

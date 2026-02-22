@@ -1,0 +1,283 @@
+/**
+ * SubTracker — Settings Page Styles
+ * BEM naming convention
+ */
+
+/* ============================================
+   SETTINGS CONTAINER
+   ============================================ */
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ============================================
+   SETTINGS SECTION (Card)
+   ============================================ */
+.settings__section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: background-color var(--transition-theme), border-color var(--transition-theme);
+}
+
+.settings__section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-block-end: var(--space-4);
+}
+
+.settings__section-title svg {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   SETTINGS ROW
+   ============================================ */
+.settings__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.settings__row + .settings__row {
+  margin-block-start: var(--space-4);
+}
+
+.settings__row-label {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.settings__row-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-block-start: var(--space-1);
+}
+
+/* ============================================
+   SEGMENTED CONTROL (Theme / Language)
+   ============================================ */
+.settings__segment {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.settings__segment-btn {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.settings__segment-btn + .settings__segment-btn {
+  border-inline-start: 1px solid var(--color-border);
+}
+
+.settings__segment-btn:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.settings__segment-btn--active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.settings__segment-btn--active:hover {
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+}
+
+/* ============================================
+   SETTINGS SELECT
+   ============================================ */
+.settings__select {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-height: 40px;
+  min-width: 160px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.settings__select:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+/* ============================================
+   PROFILE FORM
+   ============================================ */
+.settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.settings__form-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-end;
+}
+
+.settings__form-row .form-group {
+  flex: 1;
+  margin-block-end: 0;
+}
+
+.settings__form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ============================================
+   SECURITY — PASSWORD FORM
+   ============================================ */
+.settings__password-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 400px;
+}
+
+.settings__password-form .form-group {
+  margin-block-end: 0;
+}
+
+/* ============================================
+   GOOGLE ACCOUNT INFO
+   ============================================ */
+.settings__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--color-surface-hover);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.settings__info svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+/* ============================================
+   DANGER ZONE
+   ============================================ */
+.settings__section--danger {
+  border-color: var(--color-danger);
+  border-style: dashed;
+}
+
+.settings__section--danger .settings__section-title {
+  color: var(--color-danger);
+}
+
+.settings__section--danger .settings__section-title svg {
+  color: var(--color-danger);
+}
+
+.settings__danger-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-block-end: var(--space-4);
+  line-height: var(--line-height-body);
+}
+
+/* ============================================
+   CREDENTIAL DISPLAY ON SUB CARDS
+   ============================================ */
+.sub-card__credentials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block-start: var(--space-3);
+  margin-block-start: var(--space-3);
+  border-block-start: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.sub-card__cred-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-secondary);
+  min-width: 0;
+}
+
+.sub-card__cred-item svg {
+  flex-shrink: 0;
+}
+
+.sub-card__cred-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub-card__cred-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-inline-start: auto;
+}
+
+.sub-card__cred-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.sub-card__cred-btn:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 479px) {
+  .settings__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings__form-row {
+    flex-direction: column;
+  }
+
+  .settings__select {
+    width: 100%;
+  }
+}

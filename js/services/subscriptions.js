@@ -129,6 +129,10 @@ const SubscriptionService = (function() {
       totalCost: parseFloat(data.totalCost) || parseFloat(data.amount) || 0,
       yourShare: parseFloat(data.yourShare) || parseFloat(data.amount) || 0,
       sharedWith: data.sharedWith || [],
+      credentials: {
+        username: (data.credentials && data.credentials.username) || '',
+        password: (data.credentials && data.credentials.password) || ''
+      },
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };

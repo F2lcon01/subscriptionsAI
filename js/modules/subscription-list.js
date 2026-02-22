@@ -166,6 +166,9 @@ const SubscriptionList = (function() {
             '<span class="sub-card__renewal-date">' + _formatDate(sub.nextRenewalDate) + '</span>' +
           '</div>' +
         '</div>' +
+
+        // Credentials (if stored)
+        _credentialsHTML(sub) +
       '</div>';
   }
 
@@ -203,6 +206,22 @@ const SubscriptionList = (function() {
         if (menuBtn) {
           e.stopPropagation();
           _toggleDropdown(card);
+          return;
+        }
+
+        // Reveal password button
+        var revealBtn = e.target.closest('[data-action="reveal"]');
+        if (revealBtn) {
+          e.stopPropagation();
+          var pwSpan = card.querySelector('.sub-card__cred-password');
+          if (pwSpan) {
+            var realPw = revealBtn.getAttribute('data-password');
+            if (pwSpan.textContent === '••••••••') {
+              pwSpan.textContent = realPw;
+            } else {
+              pwSpan.textContent = '••••••••';
+            }
+          }
           return;
         }
 
@@ -306,6 +325,35 @@ const SubscriptionList = (function() {
     return date.toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', {
       month: 'short', day: 'numeric'
     });
+  }
+
+  function _credentialsHTML(sub) {
+    var cred = sub.credentials;
+    if (!cred || (!cred.username && !cred.password)) return '';
+
+    return '' +
+      '<div class="sub-card__credentials">' +
+        (cred.username ?
+          '<div class="sub-card__cred-item">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' +
+            '<span class="sub-card__cred-value">' + _escapeHTML(cred.username) + '</span>' +
+          '</div>' : '') +
+        (cred.password ?
+          '<div class="sub-card__cred-item">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' +
+            '<span class="sub-card__cred-value sub-card__cred-password">••••••••</span>' +
+          '</div>' : '') +
+        (cred.password ?
+          '<div class="sub-card__cred-actions">' +
+            '<button class="sub-card__cred-btn" data-action="reveal" data-password="' + _escapeAttr(cred.password) + '" title="' + I18n.t('subscription.show_password') + '">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>' +
+            '</button>' +
+          '</div>' : '') +
+      '</div>';
+  }
+
+  function _escapeAttr(str) {
+    return (str || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
   function _escapeHTML(str) {
