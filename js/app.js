@@ -11,13 +11,17 @@ const App = (function() {
    * Order matters: Theme → i18n → Auth → UI bindings
    */
   async function init() {
-    // 1. Initialize theme (already partially done in <head> script)
-    Theme.init();
+    try {
+      // 1. Initialize theme (already partially done in <head> script)
+      Theme.init();
 
-    // 2. Initialize i18n (load translations)
-    await I18n.init();
+      // 2. Initialize i18n (load translations)
+      await I18n.init();
+    } catch (err) {
+      console.error('App init error (non-critical):', err);
+    }
 
-    // 3. Initialize authentication (shows auth or app)
+    // 3. Initialize authentication (shows auth or app) — MUST always run
     AuthService.init();
 
     // 4. Bind global UI event listeners
@@ -59,12 +63,20 @@ const App = (function() {
 
   function _renderCurrentPage() {
     var page = Router.getCurrentPage();
+    if (!page) {
+      // Router not ready yet, default to dashboard
+      page = 'dashboard';
+    }
     switch(page) {
       case 'dashboard':
         Dashboard.render();
         break;
       case 'subscriptions':
         SubscriptionList.render();
+        break;
+      case 'settings':
+        // Settings page is static for now, just translate
+        I18n.translatePage();
         break;
     }
   }
@@ -209,5 +221,12 @@ const App = (function() {
    BOOT — Start the application when DOM is ready
    ============================================ */
 document.addEventListener('DOMContentLoaded', function() {
-  App.init();
+  App.init().catch(function(err) {
+    console.error('App boot failed:', err);
+    // Fallback: hide loading overlay and show auth section
+    var overlay = document.getElementById('loading-overlay');
+    if (overlay) overlay.hidden = true;
+    var authSection = document.getElementById('auth-section');
+    if (authSection) authSection.hidden = false;
+  });
 });

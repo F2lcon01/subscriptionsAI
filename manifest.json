@@ -1,7 +1,7 @@
 {
-  "name": "SubTracker — Subscription Management",
-  "short_name": "SubTracker",
-  "description": "Track every subscription, save every riyal. Free & open source subscription management.",
+  "name": "اشتراكاتي — إدارة الاشتراكات",
+  "short_name": "اشتراكاتي",
+  "description": "تتبّع كل اشتراك، وفّر كل ريال. منصة مجانية ومفتوحة المصدر لإدارة الاشتراكات.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F8F9FA",

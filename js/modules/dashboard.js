@@ -32,7 +32,7 @@ const Dashboard = (function() {
     return '' +
       '<div class="empty-state">' +
         '<div class="empty-state__icon">📊</div>' +
-        '<h3 class="empty-state__title" data-i18n="dashboard.empty_title">Welcome to SubTracker!</h3>' +
+        '<h3 class="empty-state__title" data-i18n="dashboard.empty_title">Welcome to اشتراكاتي!</h3>' +
         '<p class="empty-state__text" data-i18n="dashboard.empty_text">Start by adding your first subscription to track your expenses.</p>' +
         '<button class="btn btn--primary empty-state__btn" id="dashboard-add-btn" style="margin-top:var(--space-6)">' +
           '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>' +

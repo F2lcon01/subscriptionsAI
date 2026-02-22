@@ -34,4 +34,6 @@ db.enablePersistence({ synchronizeTabs: true }).catch(function(err) {
 });
 
 /* Set auth persistence to LOCAL (survives browser restart) */
-auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(err) {
+  console.warn('Auth persistence error:', err.message);
+});

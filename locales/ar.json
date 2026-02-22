@@ -1,5 +1,5 @@
 {
-  "app.name": "سب تراكر",
+  "app.name": "اشتراكاتي",
   "app.tagline": "تتبّع كل اشتراك، وفّر كل ريال",
 
   "nav.dashboard": "لوحة التحكم",
@@ -50,7 +50,7 @@
   "auth.error.generic": "حدث خطأ. حاول مرة أخرى.",
   "auth.error.popup_closed": "تم إغلاق نافذة تسجيل الدخول. حاول مرة أخرى.",
 
-  "dashboard.empty_title": "مرحبًا بك في سب تراكر!",
+  "dashboard.empty_title": "مرحبًا بك في اشتراكاتي!",
   "dashboard.empty_text": "ابدأ بإضافة أول اشتراك لتتبّع مصاريفك.",
   "dashboard.upcoming": "التجديدات القادمة",
   "dashboard.no_upcoming": "لا توجد تجديدات قادمة هذا الأسبوع",

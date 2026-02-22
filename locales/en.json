@@ -1,5 +1,5 @@
 {
-  "app.name": "SubTracker",
+  "app.name": "اشتراكاتي",
   "app.tagline": "Track every subscription, save every riyal",
 
   "nav.dashboard": "Dashboard",
@@ -50,7 +50,7 @@
   "auth.error.generic": "An error occurred. Please try again.",
   "auth.error.popup_closed": "Sign-in popup was closed. Please try again.",
 
-  "dashboard.empty_title": "Welcome to SubTracker!",
+  "dashboard.empty_title": "Welcome to اشتراكاتي!",
   "dashboard.empty_text": "Start by adding your first subscription to track your expenses.",
   "dashboard.upcoming": "Upcoming Renewals",
   "dashboard.no_upcoming": "No upcoming renewals this week",
