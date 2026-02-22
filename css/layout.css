@@ -232,14 +232,15 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-1);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-md);
-  font-size: var(--font-size-xs);
+  font-size: 10px;
   font-weight: 500;
   color: var(--color-text-secondary);
   transition: color var(--transition-fast), transform 100ms ease;
-  min-width: 64px;
+  min-width: 48px;
   min-height: 44px;
+  flex: 1;
 }
 
 .bottom-nav__item--active {

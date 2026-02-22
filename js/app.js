@@ -41,9 +41,29 @@ const App = (function() {
     // Initialize subscription real-time listener
     SubscriptionService.init();
 
+    // Initialize services
+    CurrencyService.init();
+    Gamification.init();
+    PanicMode.init();
+    NotificationService.init();
+    AICompanion.init();
+
+    // Render AI chat widget
+    AICompanion.renderChatWidget();
+
     // Listen for subscription data changes → re-render pages
     SubscriptionService.onChange(function() {
       _renderCurrentPage();
+    });
+
+    // Online/offline detection
+    window.addEventListener('online', function() {
+      var banner = document.getElementById('offline-banner');
+      if (banner) banner.hidden = true;
+    });
+    window.addEventListener('offline', function() {
+      var banner = document.getElementById('offline-banner');
+      if (banner) banner.hidden = false;
     });
 
     // Render the current page
@@ -55,6 +75,11 @@ const App = (function() {
    */
   function onAppDestroy() {
     SubscriptionService.destroy();
+    CryptoService.clearCache();
+    AICompanion.clearHistory();
+    NotificationService.stopPeriodicCheck();
+    var widget = document.getElementById('ai-chat-widget');
+    if (widget) widget.remove();
   }
 
   // =============================================
@@ -73,6 +98,18 @@ const App = (function() {
         break;
       case 'subscriptions':
         SubscriptionList.render();
+        break;
+      case 'calendar':
+        CalendarView.render();
+        break;
+      case 'reports':
+        Reports.render();
+        break;
+      case 'tools':
+        MiniApps.render();
+        break;
+      case 'admin':
+        AdminDashboard.render();
         break;
       case 'settings':
         Settings.render();

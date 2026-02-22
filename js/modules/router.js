@@ -10,6 +10,10 @@ const Router = (function() {
   const ROUTES = {
     '/dashboard': 'dashboard',
     '/subscriptions': 'subscriptions',
+    '/calendar': 'calendar',
+    '/reports': 'reports',
+    '/tools': 'tools',
+    '/admin': 'admin',
     '/settings': 'settings'
   };
 
@@ -49,13 +53,50 @@ const Router = (function() {
     var hash = window.location.hash.replace('#', '') || DEFAULT_ROUTE;
     var pageName = ROUTES[hash];
 
+    // Handle dynamic shared route: /shared/{userId}/{token}
+    if (!pageName && hash.startsWith('/shared/')) {
+      var parts = hash.split('/');
+      if (parts.length >= 4) {
+        _handleSharedView(parts[2], parts[3]);
+        return;
+      }
+    }
+
     if (!pageName) {
-      // Redirect to default if route not found
       navigate(DEFAULT_ROUTE);
       return;
     }
 
     _showPage(pageName);
+  }
+
+  function _handleSharedView(userId, token) {
+    SharingService.getSharedView(userId, token).then(function(data) {
+      if (!data) {
+        Toast.error(I18n.t('share.invalid_link'));
+        navigate(DEFAULT_ROUTE);
+        return;
+      }
+      var main = document.getElementById('main-content');
+      var pages = document.querySelectorAll('.page');
+      pages.forEach(function(p) { p.hidden = true; });
+
+      var sharedPage = document.getElementById('page-shared') || document.createElement('div');
+      sharedPage.id = 'page-shared';
+      sharedPage.className = 'page';
+      sharedPage.hidden = false;
+      sharedPage.innerHTML = '<div style="padding:var(--space-5);max-width:800px;margin:0 auto">' +
+        '<h2>' + data.ownerName + ' — ' + I18n.t('share.shared_view') + '</h2>' +
+        '<p style="color:var(--color-text-secondary);margin-block-end:var(--space-4)">' + data.subscriptions.length + ' ' + I18n.t('share.subscriptions') + '</p>' +
+        data.subscriptions.map(function(s) {
+          return '<div style="padding:var(--space-3);background:var(--color-surface);border-radius:var(--radius-lg);margin-block-end:var(--space-2);display:flex;justify-content:space-between">' +
+            '<span>' + (s.icon || '📦') + ' ' + s.name + '</span>' +
+            '<span>' + (s.yourShare || s.amount || 0).toFixed(2) + ' ' + (s.currency || 'SAR') + '</span>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+      if (!document.getElementById('page-shared')) main.appendChild(sharedPage);
+    });
   }
 
   function _showPage(pageName) {
