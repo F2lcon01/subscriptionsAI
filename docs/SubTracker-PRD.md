@@ -92,6 +92,8 @@ The subscription management market has grown significantly. The average consumer
 | **Smart Insights / AI** | ❌ | ❌ | ❌ | ✅ **ROI, Patterns, Wrapped** |
 | **Smart Alerts Engine** | ❌ | ❌ | Basic | ✅ **Proactive + AI-powered** |
 | **Mini-Apps** | ❌ | ❌ | ❌ | ✅ **7 built-in mini-apps** |
+| **Panic Mode** | ❌ | ❌ | ❌ | ✅ **Instant emergency lock** |
+| **AI Assistant (BYOK)** | ❌ | ❌ | ❌ | ✅ **Bring Your Own Key** |
 
 ### 2.2 Market Gaps & Opportunities
 
@@ -231,6 +233,8 @@ These features transform SubTracker from a simple tracker into a **comprehensive
 | Gamification System | **P4** | Streaks, badges, Subscription Score (0-100), monthly challenges, level system, personal savings goals |
 | Smart Insights Engine | **P4** | Pattern analysis, lifetime cost tracking, Subscription ROI calculator, peer comparison, Yearly Wrapped report |
 | Mini-Apps Platform | **P4** | Password Health Check, Expense Splitter, Google/Apple Calendar sync, Quick Links Hub, Bill Archive |
+| Panic Mode / Emergency Lock | **P4** | One-tap instant lock — hides all passwords and sensitive data, requires Master Password to unlock, auto-lock timer, remote lock, stealth mode |
+| AI Financial Companion (BYOK) | **P4** | Full AI assistant (Claude/OpenAI/Gemini) — user provides their own API key. Smart analysis, alternative suggestions, budget advice, Wrapped narrator. App works 100% without it. |
 
 ---
 
@@ -463,6 +467,89 @@ Transform SubTracker from a tracker into a **comprehensive subscription manageme
 | **📄 Bill Archive** | Store and organize subscription invoices | Upload receipt photos or PDFs, auto-extract amount and date via OCR, searchable archive, export for tax/accounting purposes |
 | **🧮 Subscription Calculator** | "What if" scenario planning | "If I cancel X and Y, I save Z per month", drag subscriptions to simulate changes, compare current vs proposed budget |
 | **📋 Subscription Checklist** | Onboarding checklist for new subscriptions | When adding a new sub: "Did you set a reminder? Save the password? Check the cancellation policy?", ensures no details are missed |
+
+#### 🔒 Panic Mode / Emergency Lock — Instant Security Shield
+
+For situations where your device is compromised, lost, or accessed by someone else. One tap locks everything.
+
+| Aspect | Details |
+|--------|---------|
+| **Activation** | Single panic button (🔒) accessible from any screen — or triple-tap the app icon |
+| **Instant Lock** | Immediately hides all passwords, costs, usernames, and sensitive data |
+| **Master Password** | Requires a separate Master Password (different from login) to unlock — set during onboarding |
+| **Biometric Unlock** | Optionally allow Face ID / fingerprint as alternative to Master Password |
+| **Stealth Mode** | While locked, app shows a decoy "empty" dashboard — attacker doesn't even know data exists |
+| **Auto-Lock Timer** | Configure auto-lock after inactivity: 1 min / 5 min / 15 min / 30 min / never |
+| **Remote Lock** | Lock your account from another device by logging into SubTracker web and triggering emergency lock |
+| **Lock History** | Log of all lock/unlock events with timestamps for security auditing |
+| **Sensitive Fields** | Even when unlocked, passwords require an extra tap + biometric/PIN to reveal (never shown by default) |
+| **Keyboard Shortcut** | Desktop: Ctrl+Shift+L (or Cmd+Shift+L on Mac) instantly triggers Panic Mode |
+
+**User Scenario:** You leave your laptop open at a café. Someone sits down. You realize from across the room. Open SubTracker on your phone → tap 🔒 → all data on the laptop is instantly locked. Crisis averted.
+
+#### 🤖 AI Financial Companion — Ready to Activate (BYOK: Bring Your Own Key)
+
+A full AI assistant built into SubTracker, **ready to work the moment you add an API key**. No key required for the app to function — AI features are a powerful optional upgrade.
+
+**How It Works:**
+
+| Aspect | Details |
+|--------|---------|
+| **Setup** | User goes to Settings → AI Assistant → enters their own API key (Claude, OpenAI, or Gemini) |
+| **Cost to User** | They pay only for their own API usage (typically $0.01–0.05 per conversation) |
+| **No Key = No Problem** | App works 100% without AI — all core features remain fully functional |
+| **Key Storage** | API key encrypted client-side with the same AES-256-GCM as passwords — never sent to SubTracker servers |
+| **Supported Providers** | Anthropic Claude API, OpenAI GPT API, Google Gemini API (user chooses) |
+| **Privacy** | All AI queries processed directly between user's browser and the AI provider — SubTracker never sees the conversation |
+
+**AI Capabilities When Activated:**
+
+| Feature | Example | Trigger |
+|---------|---------|---------|
+| **Natural Language Queries** | "What's my most expensive subscription?" "How much do I spend on entertainment?" | Chat interface or voice input |
+| **Smart Cost Analysis** | "You pay for Netflix AND Shahid AND Disney+ — 3 streaming services at 150 SAR/month. Cancel one to save 600 SAR/year" | Automatic analysis on dashboard load |
+| **Alternative Suggestions** | "YouTube Music gives you the same features as Spotify at 10 SAR less/month" | When viewing a subscription detail |
+| **Price Hike Context** | "Spotify raised prices — here's what changed and whether it's still worth it based on your usage" | Triggered by price change detection |
+| **Financial Forecasting** | "Based on current subscriptions, you'll spend 8,400 SAR this year — 12% more than last year" | Monthly insight generation |
+| **Cancellation Coach** | "Here's the fastest way to cancel Adobe CC — direct link + what to say to retention team" | When user marks a sub for cancellation |
+| **Budget Advisor** | "You set a 300 SAR/month goal. You're at 385 SAR. Here are 3 subscriptions to cut to reach your goal" | When user is over budget |
+| **Pattern Detection** | "You tend to subscribe to new services in January — 3 of the last 4 January subs were cancelled within 2 months" | Quarterly behavior analysis |
+| **Yearly Wrapped Narrator** | AI generates a personalized, engaging narrative for your Yearly Wrapped report | End of year trigger |
+| **Multilingual** | Responds in Arabic or English based on user's language preference | Automatic |
+
+**UI Integration:**
+
+- 💬 **Chat Widget:** Floating chat bubble in bottom corner (like a support chat, but it's your AI advisor)
+- ✨ **Inline Suggestions:** AI tips appear as subtle cards on the dashboard: "💡 Tip: Switch to annual billing on 2 services to save 160 SAR"
+- 🔔 **AI-Powered Alerts:** When Smart Alert Engine detects something, AI adds context and recommendations
+- 📊 **Dashboard AI Summary:** "Good morning! You have 2 renewals today (65 SAR). Your Subscription Score is 82 — up 3 points this week."
+
+**Settings Page for AI:**
+
+```
+┌─────────────────────────────────────────┐
+│  🤖 AI Assistant Settings               │
+│                                         │
+│  Status: ○ Disabled  ● Enabled          │
+│                                         │
+│  Provider: [Claude API ▼]               │
+│                                         │
+│  API Key: [sk-ant-••••••••••] [👁 Show] │
+│                                         │
+│  Language: [Same as app ▼]              │
+│                                         │
+│  Features:                              │
+│  ☑ Smart cost analysis                  │
+│  ☑ Alternative suggestions              │
+│  ☑ Budget advice                        │
+│  ☑ Dashboard AI summary                 │
+│  ☐ Voice input (experimental)           │
+│                                         │
+│  Monthly API usage: ~$0.45              │
+│                                         │
+│  [Test Connection]  [Save Settings]     │
+└─────────────────────────────────────────┘
+```
 
 ---
 
@@ -1039,6 +1126,8 @@ Month 13-15 ┃ Phase 4A ┃ 🚀 GAME-CHANGERS: Smart Alert Engine (proactive A
 Month 16-18 ┃ Phase 4B ┃ 🚀 Subscription Marketplace (discover, compare, review, exclusive deals)
              ┃          ┃ + Mini-Apps Platform (Password Health, Calendar Sync, Bill Archive,
              ┃          ┃   Quick Links Hub, Expense Splitter, Subscription Calculator)
+             ┃          ┃ + 🔒 Panic Mode / Emergency Lock (instant security shield)
+             ┃          ┃ + 🤖 AI Financial Companion (BYOK — Bring Your Own API Key)
              ┃          ┃ + Community features + Leaderboards + full platform maturity
 ```
 
