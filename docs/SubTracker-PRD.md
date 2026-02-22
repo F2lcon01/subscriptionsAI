@@ -81,6 +81,12 @@ The subscription management market has grown significantly. The average consumer
 | **Dark/Light Theme** | ✅ | ❌ Dark only | ✅ | ✅ **Auto + Manual** |
 | **Categories** | ✅ Custom | ✅ Basic | ✅ Auto | ✅ **Custom** |
 | **Export Data** | ❌ | ❌ | ❌ | ✅ **CSV + PDF** |
+| **Free Trial Tracker** | ❌ | ❌ | ❌ | ✅ **Countdown + Auto-Alert** |
+| **Calendar View** | ✅ Basic | ❌ | ❌ | ✅ **Hijri + Gregorian** |
+| **Pause/Archive** | ❌ | ❌ | ❌ | ✅ **Freeze & Reactivate** |
+| **Family Cost Split** | ❌ | ❌ | ❌ | ✅ **Per-person splitting** |
+| **Email Import** | ❌ | ❌ | ✅ Auto-detect | ✅ **Gmail Scan (Phase 3)** |
+| **Social Sharing** | ❌ | ❌ | ❌ | ✅ **Public Stack Pages** |
 
 ### 2.2 Market Gaps & Opportunities
 
@@ -171,6 +177,8 @@ SubTracker positions itself as the **first bilingual (Arabic/English) subscripti
 | Basic Notifications | **P1** | Browser push notifications for upcoming renewals |
 | Subscription Categories | **P1** | Entertainment, Work, Social, Education, Other |
 | Edit/Delete Subscriptions | **P0** | Full CRUD operations on subscription entries |
+| Free Trial Tracker | **P0** | Mark subscription as "free trial" with countdown timer + auto-alert 1 day before trial ends. 42% of users forget to cancel trials. |
+| Pause/Archive Subscription | **P1** | Freeze a subscription temporarily — data preserved but excluded from cost calculations. Reactivate with one click. |
 
 ### 6.2 Phase 2 — Enhanced Experience
 
@@ -184,6 +192,9 @@ SubTracker positions itself as the **first bilingual (Arabic/English) subscripti
 | Data Export | **P2** | Export subscriptions as CSV or PDF |
 | Custom Notification Timing | **P1** | User sets days-before-expiry for alerts |
 | Apple Sign-In | **P2** | Additional OAuth provider for iOS users |
+| Calendar View (Hijri + Gregorian) | **P1** | Interactive dual-calendar (Umm al-Qura Hijri + Gregorian) showing renewal dates as colored dots, daily cost totals, and "expensive days" highlighting |
+| Family/Shared Subscriptions | **P2** | Tag subscriptions as "family" or "shared with someone" with cost-splitting (e.g., Netflix Family = your share 25 SAR out of 75 SAR total) |
+| Smart Social Sharing | **P2** | Generate a beautiful shareable page of your favorite tools/subscriptions — useful for developers and designers sharing their tech stack |
 
 ### 6.3 Phase 3 — Advanced Features
 
@@ -192,11 +203,111 @@ SubTracker positions itself as the **first bilingual (Arabic/English) subscripti
 | WhatsApp/SMS Notifications | **P3** | Renewal alerts via WhatsApp Business API or Twilio |
 | Admin Dashboard | **P3** | User management, global stats, system health |
 | Advanced Analytics | **P3** | Spending trends, year-over-year comparison, forecasting |
-| Calendar View | **P3** | Visual calendar showing all renewal dates |
 | Service Logo Auto-Fetch | **P3** | Automatically fetch logos from service URLs |
 | Recurring Payment Insights | **P3** | AI-powered suggestions for cost optimization |
 | Import from Spreadsheet | **P3** | Bulk import subscriptions from CSV/Excel |
 | Multi-Language Expansion | **P3** | Additional languages beyond Arabic and English |
+| Smart Email Import | **P3** | Scan confirmation emails (Gmail integration) to auto-discover subscriptions — "We found 5 subscriptions in your inbox, add them?" |
+| PWA Home Screen Widget | **P3** | Quick glance widget showing: "3 subscriptions expiring this week" + total monthly cost |
+
+---
+
+### 6.4 New Feature Details
+
+#### 🧪 Free Trial Tracker
+
+The free trial tracker addresses a critical pain point: **42% of users forget to cancel free trials**, resulting in unwanted charges.
+
+| Aspect | Details |
+|--------|---------|
+| **How it works** | When adding a subscription, user selects "Free Trial" toggle |
+| **Countdown Timer** | Prominent countdown displayed on the subscription card (e.g., "3 days 14 hours left") |
+| **Visual Indicator** | Distinct card style with dashed border + "TRIAL" badge to differentiate from paid subscriptions |
+| **Auto-Alert** | Push notification + email sent **1 day before** trial ends (non-dismissible reminder) |
+| **Quick Actions** | "Cancel Now" button links directly to the service's cancellation page, "Convert to Paid" button transitions the subscription to active tracking |
+| **Dashboard Integration** | Separate "Active Trials" counter on dashboard with expiring-soonest on top |
+
+#### 📅 Calendar View (Hijri + Gregorian)
+
+An interactive dual-calendar providing a visual overview of all renewal dates and spending patterns.
+
+| Aspect | Details |
+|--------|---------|
+| **Dual Calendar** | Toggle between Umm al-Qura Hijri and Gregorian calendars (or show both side-by-side on desktop) |
+| **Renewal Dots** | Color-coded dots on renewal dates: 🟢 low cost, 🟡 medium, 🔴 high cost |
+| **Daily Cost Total** | Each day shows the total amount due (e.g., "Feb 15: 85 SAR") |
+| **Expensive Days** | Days with high spending highlighted with a red background glow |
+| **Monthly Overview** | Top bar shows: total renewals this month, total cost, comparison with last month |
+| **Click to Expand** | Tap a day to see all subscriptions renewing on that date with details |
+| **Navigation** | Swipe or arrow keys to navigate months, jump to today, jump to specific month |
+
+#### ⏸️ Pause/Archive Subscription
+
+Instead of deleting, users can temporarily freeze subscriptions while preserving all data.
+
+| Aspect | Details |
+|--------|---------|
+| **Pause Action** | Swipe left on card (mobile) or click pause icon → subscription moves to "Paused" section |
+| **Visual State** | Paused cards shown in grayscale with "PAUSED" overlay badge |
+| **Cost Exclusion** | Paused subscriptions excluded from all dashboard calculations and cost totals |
+| **Data Preserved** | All fields intact: credentials, dates, category, notes — nothing lost |
+| **Reactivate** | One-tap "Reactivate" button restores to active list with recalculated dates |
+| **Bulk Actions** | Select multiple subscriptions to pause/reactivate at once |
+| **Auto-Pause Suggestion** | If a subscription has been unused for 30+ days (no credential access), suggest pausing it |
+
+#### 👨‍👩‍👧‍👦 Family/Shared Subscriptions
+
+Track shared subscription costs with accurate per-person splitting.
+
+| Aspect | Details |
+|--------|---------|
+| **Subscription Type** | Tag as: "Individual", "Family Plan", or "Shared with Others" |
+| **Total vs Your Share** | Input total cost AND your personal share (e.g., Total: 75 SAR, Your share: 25 SAR) |
+| **Split Members** | Optionally add names of people sharing (just for reference, no accounts needed) |
+| **Dashboard Impact** | Dashboard shows "Your Actual Cost" (after splitting) vs "Total Subscription Cost" |
+| **Family Summary** | Dedicated view showing all family/shared subscriptions and how much you're saving through sharing |
+| **Invite to SubTracker** | "Invite [person] to track their share too" — generates referral link |
+
+#### 🔗 Smart Social Sharing
+
+Generate beautiful, shareable pages showcasing your subscription stack.
+
+| Aspect | Details |
+|--------|---------|
+| **Generate Page** | One-click generates a public, beautiful page listing your chosen subscriptions |
+| **Customizable** | Choose which subscriptions to show/hide, add personal notes/reviews |
+| **Design Templates** | Multiple card layouts: Grid, List, Minimal — with your name/avatar |
+| **Share Links** | Direct link, Twitter/X card, LinkedIn post, copy embed code |
+| **Privacy Control** | Costs, credentials, and personal data NEVER included — only service names, icons, and your notes |
+| **Use Cases** | "My Developer Toolkit", "My Design Stack", "My Entertainment Setup" |
+| **Community Discovery** | Browse other users' public stacks for inspiration (opt-in only) |
+
+#### 📧 Smart Email Import (Phase 3)
+
+Automatically discover subscriptions by scanning confirmation emails.
+
+| Aspect | Details |
+|--------|---------|
+| **Gmail Integration** | Connect Gmail via OAuth (read-only access to specific labels/senders) |
+| **Smart Detection** | Scan for subscription confirmation, receipt, and renewal emails |
+| **AI Extraction** | Extract service name, cost, billing cycle, and start date from email content |
+| **Review Before Import** | "We found 5 subscriptions — review and add" (user confirms each one) |
+| **One-Time or Ongoing** | Option for one-time scan or periodic background checks for new subscriptions |
+| **Privacy** | Emails processed client-side where possible; only extracted metadata stored; full email content never saved |
+| **Supported Providers** | Gmail (Phase 3), Outlook (future), Yahoo (future) |
+
+#### 📱 PWA Home Screen Widget
+
+Quick-glance information without opening the full app.
+
+| Aspect | Details |
+|--------|---------|
+| **Widget Content** | Upcoming renewals count, total monthly cost, next expiring subscription |
+| **Visual Style** | Compact card matching the app's theme (dark/light) |
+| **Tap Action** | Tapping the widget opens SubTracker to the relevant section |
+| **Badge Notifications** | App icon badge shows count of subscriptions expiring within 3 days |
+| **Implementation** | Using the Badging API + periodic background sync via Service Worker |
+| **Limitation** | Full widget support varies by OS; badge notifications are the most reliable cross-platform |
 
 ---
 
@@ -379,10 +490,25 @@ users/{userId}
 │   ├── startDate, duration, durationType
 │   ├── category, username, encryptedPassword
 │   ├── isActive, createdAt, updatedAt
-│   └── notifyDaysBefore
-└── sharedWith/{shareId}
-    ├── sharedByUserId
-    ├── permissions: "read-only"
+│   ├── notifyDaysBefore
+│   ├── isTrial (boolean) — marks as free trial
+│   ├── trialEndDate — auto-alert triggers 1 day before
+│   ├── status: "active" | "paused" | "expired" | "trial"
+│   ├── pausedAt — timestamp when paused
+│   ├── subscriptionType: "individual" | "family" | "shared"
+│   ├── totalCost — full cost before splitting
+│   ├── yourShare — user's portion of the cost
+│   ├── sharedWith: ["Name1", "Name2"] — reference names
+│   └── priceHistory: [{date, amount}] — track price changes
+├── sharedWith/{shareId}
+│   ├── sharedByUserId
+│   ├── permissions: "read-only"
+│   └── createdAt
+└── publicStacks/{stackId}
+    ├── title: "My Developer Toolkit"
+    ├── subscriptionIds: [selected subscriptions]
+    ├── template: "grid" | "list" | "minimal"
+    ├── isPublic: true
     └── createdAt
 ```
 
@@ -717,10 +843,17 @@ The project is open-source and community-driven. There are no ads, no premium ti
 ```
 Month  1-2  ┃ Phase 1A ┃ Project setup, Firebase config, auth, UI shell, i18n framework
 Month  3-4  ┃ Phase 1B ┃ Subscription CRUD, dashboard stats, progress bars, theme, responsive
+             ┃          ┃ + Free Trial Tracker with countdown & auto-alerts
+             ┃          ┃ + Pause/Archive subscription functionality
 Month  5-6  ┃ Phase 1C ┃ PWA setup, push notifications, categories, multi-currency → MVP Launch 🚀
 Month  7-8  ┃ Phase 2A ┃ Password manager (encrypted), email notifications, custom alert timing
+             ┃          ┃ + Calendar View (Hijri + Gregorian dual calendar)
+             ┃          ┃ + Family/Shared subscription cost splitting
 Month  9-10 ┃ Phase 2B ┃ Team sharing, data export (CSV/PDF), monthly reports with charts
-Month 11-12 ┃ Phase 3  ┃ Admin dashboard, calendar view, WhatsApp notifications, logo auto-fetch
+             ┃          ┃ + Smart Social Sharing (generate public tool stack pages)
+Month 11-12 ┃ Phase 3  ┃ Admin dashboard, WhatsApp notifications, logo auto-fetch
+             ┃          ┃ + Smart Email Import (Gmail scan for subscriptions)
+             ┃          ┃ + PWA Widget (badge notifications, quick-glance info)
 ```
 
 ---
