@@ -52,7 +52,10 @@ const AICompanion = (function() {
       _provider = doc.data().ai.provider || null;
       if (doc.data().ai.apiKeyEncrypted && CryptoService.isVerified()) {
         try {
-          _apiKey = await CryptoService.decrypt(doc.data().ai.apiKeyEncrypted);
+          var masterPwd = await CryptoService.getMasterPassword();
+          if (masterPwd) {
+            _apiKey = await CryptoService.decrypt(doc.data().ai.apiKeyEncrypted, masterPwd);
+          }
         } catch (e) { _apiKey = null; }
       }
     }
@@ -66,8 +69,9 @@ const AICompanion = (function() {
     if (!user) return;
 
     var encrypted = null;
-    if (CryptoService.isVerified()) {
-      encrypted = await CryptoService.encrypt(apiKey);
+    var masterPwd = await CryptoService.getMasterPassword();
+    if (masterPwd) {
+      encrypted = await CryptoService.encrypt(apiKey, masterPwd);
     }
 
     await db.collection('users').doc(user.uid).update({

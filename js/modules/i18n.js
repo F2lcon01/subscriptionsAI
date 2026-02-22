@@ -186,6 +186,14 @@ const I18n = (function() {
     });
   }
 
+  /**
+   * Get locale string for Intl APIs (e.g., 'en-US', 'ar-SA')
+   * @returns {string} Locale string
+   */
+  function getLocale() {
+    return currentLang === 'ar' ? 'ar-SA' : 'en-US';
+  }
+
   // Public API
   return {
     init: init,
@@ -193,6 +201,7 @@ const I18n = (function() {
     setLang: setLang,
     t: t,
     getLang: getLang,
+    getLocale: getLocale,
     isRTL: isRTL,
     onChange: onChange,
     translatePage: translatePage

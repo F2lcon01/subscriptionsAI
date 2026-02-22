@@ -14,13 +14,14 @@ const NotificationService = (function() {
    * Initialize notification service
    */
   function init() {
-    // Initialize FCM if available
-    if (typeof firebase !== 'undefined' && firebase.messaging && firebase.messaging.isSupported()) {
-      try {
+    // Initialize FCM if available (wrapped in try/catch for browser compatibility)
+    try {
+      if (typeof firebase !== 'undefined' && firebase.messaging &&
+          typeof firebase.messaging.isSupported === 'function' && firebase.messaging.isSupported()) {
         _messaging = firebase.messaging();
-      } catch (e) {
-        console.warn('FCM init failed:', e);
       }
+    } catch (e) {
+      console.warn('FCM init failed:', e);
     }
   }
 
@@ -74,7 +75,7 @@ const NotificationService = (function() {
    * Check upcoming renewals and show local notifications
    */
   function checkUpcomingRenewals() {
-    if (Notification.permission !== 'granted') return;
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
 
     var subs = SubscriptionService.getAll();
     var now = new Date();
@@ -110,7 +111,7 @@ const NotificationService = (function() {
    * Show a local notification
    */
   function _showNotification(title, body) {
-    if (Notification.permission !== 'granted') return;
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
 
     try {
       new Notification(title, {

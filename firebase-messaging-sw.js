@@ -20,8 +20,8 @@ messaging.onBackgroundMessage(function(payload) {
   var title = payload.notification.title || 'اشتراكاتي';
   var options = {
     body: payload.notification.body || '',
-    icon: '/assets/icons/icon-192.png',
-    badge: '/assets/icons/icon-192.png'
+    icon: './assets/icons/icon-192.png',
+    badge: './assets/icons/icon-192.png'
   };
   return self.registration.showNotification(title, options);
 });

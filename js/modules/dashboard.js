@@ -190,7 +190,8 @@ const Dashboard = (function() {
   // =============================================
 
   function _getUserCurrency() {
-    return 'SAR'; // Will be user preference later
+    var stats = SubscriptionService.getStats();
+    return stats.currency || 'SAR';
   }
 
   function _formatCurrency(amount, currency) {

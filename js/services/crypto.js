@@ -60,10 +60,8 @@ const CryptoService = (function() {
     var salt = crypto.getRandomValues(new Uint8Array(SALT_LENGTH));
     var iv = crypto.getRandomValues(new Uint8Array(IV_LENGTH));
 
-    var key = _masterKeyCache;
-    if (!key) {
-      key = await _deriveKey(masterPassword, salt);
-    }
+    // Always derive key from the new salt to ensure encrypt/decrypt consistency
+    var key = await _deriveKey(masterPassword, salt);
 
     var encrypted = await crypto.subtle.encrypt(
       { name: 'AES-GCM', iv: iv },

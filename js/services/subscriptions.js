@@ -311,6 +311,21 @@ const SubscriptionService = (function() {
       categories[cat].total += _toMonthly(sub.yourShare || sub.amount, sub.billingCycle);
     });
 
+    // Determine user's primary currency (most common among active subs)
+    var currencyCounts = {};
+    active.forEach(function(sub) {
+      var c = sub.currency || 'SAR';
+      currencyCounts[c] = (currencyCounts[c] || 0) + 1;
+    });
+    var primaryCurrency = 'SAR';
+    var maxCount = 0;
+    Object.keys(currencyCounts).forEach(function(c) {
+      if (currencyCounts[c] > maxCount) {
+        maxCount = currencyCounts[c];
+        primaryCurrency = c;
+      }
+    });
+
     return {
       activeCount: active.length,
       trialCount: trials.length,
@@ -320,7 +335,8 @@ const SubscriptionService = (function() {
       yearlyTotal: Math.round(yearlyTotal * 100) / 100,
       mostExpensive: mostExpensive,
       upcoming: upcoming,
-      categories: categories
+      categories: categories,
+      currency: primaryCurrency
     };
   }
 
