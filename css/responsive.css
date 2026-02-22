@@ -49,6 +49,7 @@
   }
 
   .app__main {
+    grid-column: 2;
     padding-block-end: var(--space-6);
   }
 
