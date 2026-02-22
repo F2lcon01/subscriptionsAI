@@ -123,7 +123,7 @@ const I18n = (function() {
 
   async function _loadTranslations(lang) {
     try {
-      var response = await fetch('locales/' + lang + '.json');
+      var response = await fetch('locales/' + lang + '.json?v=' + Date.now());
       if (!response.ok) throw new Error('Failed to load ' + lang + ' translations');
       translations = await response.json();
     } catch (err) {
