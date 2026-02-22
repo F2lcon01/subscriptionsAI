@@ -1,59 +1,150 @@
-# SubTracker — Subscription Management Platform
+# اشتراكاتي — منصة إدارة الاشتراكات
 
-Track every subscription, save every riyal. Free, open-source, bilingual (Arabic/English) subscription management platform.
+> تتبّع كل اشتراك، وفّر كل ريال.
 
-## Tech Stack
+منصة مجانية ومفتوحة المصدر لإدارة الاشتراكات الرقمية، تدعم العربية والإنجليزية.
 
-- **Frontend:** HTML5 + CSS3 + Vanilla JavaScript (ES6+)
-- **Backend:** Firebase (Auth, Firestore, Cloud Functions, FCM)
-- **Design:** CSS Custom Properties + BEM, Mobile-first responsive
-- **PWA:** Installable, offline-capable
+**[جرّب التطبيق مباشرة](https://f2lcon01.github.io/subscriptionsAI/)**
 
-## Getting Started
+---
 
-1. Clone the repository
-2. Serve with any static server (e.g., `npx serve .` or VS Code Live Server)
-3. Firebase is pre-configured — authentication and database are ready
+## المميزات
 
-## Project Structure
+### إدارة الاشتراكات
+
+- إضافة وتعديل وحذف الاشتراكات بسهولة
+- اختيار سريع من أكثر من 25 خدمة شائعة (Netflix, Spotify, ChatGPT, Shahid, وغيرها)
+- دعم دورات فوترة متعددة: أسبوعي، شهري، ربع سنوي، نصف سنوي، سنوي
+- تصنيف الاشتراكات: ترفيه، عمل، تعليم، اجتماعي، أخرى
+- دعم 11 عملة (ريال سعودي، دولار، يورو، جنيه، درهم، وغيرها)
+
+### لوحة التحكم
+
+- إجمالي المصروفات الشهرية والسنوية
+- عدد الاشتراكات النشطة والتجريبية
+- التجديدات القادمة خلال الأسبوع
+- أغلى اشتراك
+- توزيع الاشتراكات حسب التصنيف مع نسب مئوية
+
+### تتبّع ذكي
+
+- شريط تقدم ملون لكل اشتراك (أخضر / أصفر / أحمر) حسب أيام التجديد المتبقية
+- دعم الفترات التجريبية المجانية مع عد تنازلي
+- إيقاف مؤقت وإعادة تفعيل الاشتراكات
+- تحويل الاشتراك التجريبي إلى مدفوع
+
+### أنواع الاشتراكات
+
+- فردي
+- عائلي (مع تحديد حصتك من المبلغ)
+- مشترك (مع تحديد حصتك من المبلغ)
+
+### ثنائي اللغة
+
+- واجهة كاملة بالعربية (RTL) والإنجليزية (LTR)
+- تبديل فوري بين اللغتين
+- ترجمة شاملة لجميع عناصر الواجهة
+
+### المظهر
+
+- الوضع الفاتح والداكن
+- كشف تلقائي لإعدادات النظام
+- تبديل سلس بدون وميض
+
+### الأمان والمصادقة
+
+- تسجيل دخول بالبريد الإلكتروني وكلمة المرور
+- تسجيل دخول بحساب Google
+- استعادة كلمة المرور
+- بياناتك محمية بقواعد أمان Firebase
+
+### تصميم متجاوب
+
+- يعمل على جميع الأجهزة: جوال، تابلت، كمبيوتر
+- شريط تنقل سفلي للجوال
+- قائمة جانبية للشاشات الكبيرة
+
+---
+
+## التقنيات المستخدمة
+
+| التقنية | الاستخدام |
+| ------- | --------- |
+| HTML5 + CSS3 | هيكل الصفحات والتنسيق |
+| Vanilla JavaScript (ES6+) | المنطق البرمجي بدون أي إطار عمل |
+| Firebase Auth | المصادقة وتسجيل الدخول |
+| Cloud Firestore | قاعدة البيانات في الوقت الحقيقي |
+| CSS Custom Properties | نظام التصميم (ألوان، خطوط، مسافات) |
+| BEM Methodology | تسمية CSS منظمة |
+| CSS Logical Properties | دعم RTL/LTR تلقائي |
+| Google Fonts | خطوط Inter و IBM Plex Sans Arabic |
+
+---
+
+## بنية المشروع
 
 ```text
 subscriptionsAI/
-├── index.html              # Main entry point
-├── manifest.json           # PWA manifest
-├── firebase.json           # Firebase hosting config
-├── firestore.rules         # Firestore security rules
-├── firestore.indexes.json  # Firestore composite indexes
+├── index.html                 # الصفحة الرئيسية
+├── manifest.json              # إعدادات PWA
+├── firebase.json              # إعدادات Firebase Hosting
+├── firestore.rules            # قواعد أمان Firestore
 ├── css/
-│   ├── variables.css       # Design tokens (colors, spacing, typography)
-│   ├── reset.css           # CSS reset
-│   ├── base.css            # Global styles
-│   ├── components.css      # Reusable components (buttons, inputs, etc.)
-│   ├── layout.css          # App shell layout (header, sidebar, nav)
-│   ├── auth.css            # Authentication page styles
-│   ├── responsive.css      # Breakpoint-based responsive rules
-│   └── animations.css      # Keyframes and transitions
+│   ├── variables.css          # متغيرات التصميم
+│   ├── reset.css              # إعادة تعيين CSS
+│   ├── base.css               # الأنماط الأساسية
+│   ├── components.css         # المكونات (أزرار، حقول، إلخ)
+│   ├── layout.css             # هيكل التطبيق
+│   ├── auth.css               # صفحة المصادقة
+│   ├── dashboard.css          # لوحة التحكم
+│   ├── subscriptions.css      # بطاقات الاشتراكات
+│   ├── modal.css              # نافذة الإضافة/التعديل
+│   ├── responsive.css         # التجاوب مع الشاشات
+│   └── animations.css         # الحركات والانتقالات
 ├── js/
-│   ├── app.js              # Main application entry point
+│   ├── app.js                 # نقطة البداية الرئيسية
 │   ├── config/
-│   │   └── firebase.js     # Firebase initialization
+│   │   └── firebase.js        # إعدادات Firebase
 │   ├── modules/
-│   │   ├── i18n.js         # Internationalization (AR/EN)
-│   │   ├── theme.js        # Dark/Light/Auto theme
-│   │   ├── router.js       # Hash-based page router
-│   │   └── toast.js        # Toast notifications
+│   │   ├── i18n.js            # نظام الترجمة
+│   │   ├── theme.js           # إدارة المظهر
+│   │   ├── router.js          # التنقل بين الصفحات
+│   │   ├── toast.js           # إشعارات التنبيه
+│   │   ├── dashboard.js       # وحدة لوحة التحكم
+│   │   ├── subscription-modal.js  # نافذة إضافة/تعديل اشتراك
+│   │   └── subscription-list.js   # قائمة الاشتراكات
 │   └── services/
-│       └── auth.js         # Firebase Auth service
+│       ├── auth.js            # خدمة المصادقة
+│       └── subscriptions.js   # خدمة إدارة الاشتراكات
 ├── locales/
-│   ├── en.json             # English translations
-│   └── ar.json             # Arabic translations
-├── assets/
-│   ├── icons/              # App icons and favicons
-│   └── images/             # Static images
-└── docs/
-    └── SubTracker-PRD.md   # Product Requirements Document
+│   ├── en.json                # الترجمة الإنجليزية
+│   └── ar.json                # الترجمة العربية
+└── assets/
+    └── icons/                 # أيقونات التطبيق
 ```
 
-## License
+---
 
-Free & Open Source
+## التشغيل محليًا
+
+1. انسخ المستودع:
+
+   ```bash
+   git clone https://github.com/F2lcon01/subscriptionsAI.git
+   ```
+
+2. شغّل أي خادم ملفات ثابت:
+
+   ```bash
+   npx serve .
+   ```
+
+   أو استخدم Live Server في VS Code.
+
+3. Firebase معدّ مسبقًا — المصادقة وقاعدة البيانات جاهزة.
+
+---
+
+## الرخصة
+
+مجاني ومفتوح المصدر.
