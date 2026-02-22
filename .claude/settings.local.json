@@ -13,7 +13,10 @@
       "Bash(git push:*)",
       "WebFetch(domain:f2lcon01.github.io)",
       "Bash(test:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(LC_ALL=C grep:*)",
+      "Bash(LC_ALL=C sort:*)",
+      "Bash(python3:*)"
     ]
   }
 }
