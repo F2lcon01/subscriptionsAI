@@ -1,0 +1,148 @@
+/**
+ * SubTracker — Authentication Page Styles
+ * Login and Register forms
+ * BEM naming convention
+ */
+
+/* ============================================
+   AUTH LAYOUT
+   ============================================ */
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-4);
+  background-color: var(--color-background);
+}
+
+/* ============================================
+   AUTH CARD
+   ============================================ */
+.auth__card {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  transition: background-color var(--transition-theme), box-shadow var(--transition-theme);
+}
+
+/* ============================================
+   AUTH HEADER
+   ============================================ */
+.auth__header {
+  text-align: center;
+  margin-block-end: var(--space-8);
+}
+
+.auth__logo {
+  font-size: 2.5rem;
+  margin-block-end: var(--space-3);
+}
+
+.auth__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-block-end: var(--space-2);
+}
+
+.auth__subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   AUTH FORM
+   ============================================ */
+.auth__form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   AUTH CONTROLS (top: language + theme)
+   ============================================ */
+.auth__controls {
+  position: absolute;
+  inset-block-start: var(--space-4);
+  inset-inline-end: var(--space-4);
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ============================================
+   AUTH FOOTER (switch between login/register)
+   ============================================ */
+.auth__footer {
+  text-align: center;
+  margin-block-start: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.auth__footer-link {
+  color: var(--color-accent);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.auth__footer-link:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   AUTH ERROR MESSAGE
+   ============================================ */
+.auth__error {
+  display: none;
+  padding: var(--space-3) var(--space-4);
+  background-color: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-block-end: var(--space-4);
+  text-align: center;
+}
+
+.auth__error--visible {
+  display: block;
+}
+
+/* ============================================
+   FORGOT PASSWORD LINK
+   ============================================ */
+.auth__forgot {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  margin-block-start: calc(-1 * var(--space-3));
+  margin-block-end: var(--space-4);
+  text-align: end;
+  width: 100%;
+  transition: color var(--transition-fast);
+}
+
+.auth__forgot:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   NAME ROW (Register: first + last name)
+   ============================================ */
+.auth__name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 479px) {
+  .auth__name-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

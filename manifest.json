@@ -1,0 +1,31 @@
+{
+  "name": "SubTracker — Subscription Management",
+  "short_name": "SubTracker",
+  "description": "Track every subscription, save every riyal. Free & open source subscription management.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F9FA",
+  "theme_color": "#1B4F72",
+  "orientation": "any",
+  "lang": "en",
+  "dir": "auto",
+  "categories": ["finance", "utilities"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

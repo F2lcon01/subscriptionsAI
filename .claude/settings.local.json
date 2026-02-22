@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(firebase projects:list:*)"
+      "Bash(firebase projects:list:*)",
+      "Bash(firebase --version:*)",
+      "Bash(npx firebase:*)",
+      "Bash(gcloud:*)",
+      "Bash(cd:*)",
+      "Bash(npx serve --version)",
+      "Bash(timeout 5 npx serve:*)"
     ]
   }
 }

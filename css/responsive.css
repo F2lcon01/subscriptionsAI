@@ -1,0 +1,86 @@
+/**
+ * SubTracker — Responsive Styles
+ * Mobile-first approach with min-width breakpoints
+ * Based on PRD Section 9.1 Breakpoints
+ *
+ * xs: 320px–479px (base)
+ * sm: 480px–767px
+ * md: 768px–1023px (tablet)
+ * lg: 1024px–1439px (desktop)
+ * xl: 1440px–2559px
+ * 2xl: 2560px+
+ */
+
+/* ============================================
+   sm (480px) — Large Phones
+   ============================================ */
+@media (min-width: 480px) {
+  .auth__card {
+    padding: var(--space-10);
+  }
+}
+
+/* ============================================
+   md (768px) — Tablet
+   ============================================ */
+@media (min-width: 768px) {
+  /* Hide mobile menu button */
+  .app__menu-btn {
+    display: none;
+  }
+
+  /* Show sidebar always on tablet+ */
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+
+  /* Sidebar overlay no longer needed */
+  .sidebar-overlay {
+    display: none !important;
+  }
+
+  /* Adjust main content for sidebar */
+  .app {
+    grid-template-columns: var(--sidebar-width) 1fr;
+  }
+
+  .app__header {
+    grid-column: 1 / -1;
+  }
+
+  .app__main {
+    padding-block-end: var(--space-6);
+  }
+
+  /* Hide bottom nav on tablet+ */
+  .bottom-nav {
+    display: none;
+  }
+}
+
+/* ============================================
+   lg (1024px) — Desktop
+   ============================================ */
+@media (min-width: 1024px) {
+  .app__main {
+    padding: var(--space-8);
+  }
+}
+
+/* ============================================
+   xl (1440px) — Large Monitors
+   ============================================ */
+@media (min-width: 1440px) {
+  .app__main {
+    padding: var(--space-10);
+  }
+}
+
+/* ============================================
+   2xl (2560px) — Ultra-wide
+   ============================================ */
+@media (min-width: 2560px) {
+  .app__main {
+    max-width: 1800px;
+  }
+}

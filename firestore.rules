@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // User profile — only owner can read/write
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // User's subscriptions — only owner can read/write
+      match /subscriptions/{subId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      // Shared access — anyone authenticated can read, only owner can write
+      match /sharedWith/{shareId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+}

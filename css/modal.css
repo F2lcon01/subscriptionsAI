@@ -1,0 +1,313 @@
+/**
+ * SubTracker — Modal Styles
+ * Add/Edit subscription modal with form elements
+ */
+
+/* ============================================
+   MODAL OVERLAY
+   ============================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.modal--visible {
+  opacity: 1;
+}
+
+.modal--closing {
+  opacity: 0;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    align-items: center;
+  }
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   MODAL CONTENT
+   ============================================ */
+.modal__content {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-lg);
+  overflow-y: auto;
+  padding: var(--space-6);
+  animation: slide-up 250ms ease-out;
+  transition: background-color var(--transition-theme);
+}
+
+@media (min-width: 768px) {
+  .modal__content {
+    border-radius: var(--radius-xl);
+    max-height: 85vh;
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--space-5);
+}
+
+.modal__title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast);
+}
+
+.modal__close:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* ============================================
+   MODAL FORM
+   ============================================ */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-start: var(--space-6);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-border);
+}
+
+/* ============================================
+   FORM ROW (multiple columns)
+   ============================================ */
+.form-row {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form-row--3 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .form-row--3 {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* ============================================
+   TEXTAREA
+   ============================================ */
+.form-group__textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* ============================================
+   POPULAR SERVICES QUICK SELECT
+   ============================================ */
+.popular-services {
+  margin-block-end: var(--space-5);
+  padding-block-end: var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.popular-services__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-block-end: var(--space-3);
+}
+
+.popular-services__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.popular-service-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface-hover);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.popular-service-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.popular-service-btn--active {
+  background-color: rgba(52, 152, 219, 0.15);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.popular-service-btn__icon {
+  font-size: 0.9rem;
+}
+
+.popular-service-btn__name {
+  font-weight: 500;
+}
+
+/* ============================================
+   CATEGORY SELECTOR
+   ============================================ */
+.category-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-hover);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.category-btn--active {
+  background-color: rgba(52, 152, 219, 0.12);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* ============================================
+   TYPE SELECTOR
+   ============================================ */
+.type-selector {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.type-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-hover);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.type-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.type-btn--active {
+  background-color: rgba(52, 152, 219, 0.12);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* ============================================
+   TOGGLE SWITCH
+   ============================================ */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle__slider {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.toggle__slider::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 2px;
+  inset-inline-start: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+}
+
+.toggle input:checked + .toggle__slider {
+  background-color: var(--color-accent);
+}
+
+.toggle input:checked + .toggle__slider::after {
+  transform: translateX(20px);
+}
+
+[dir="rtl"] .toggle input:checked + .toggle__slider::after {
+  transform: translateX(-20px);
+}
+
+.toggle__label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}

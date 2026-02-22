@@ -1,0 +1,315 @@
+/**
+ * SubTracker — Subscription Page Styles
+ * Cards, progress bars, filters, card dropdown
+ */
+
+/* ============================================
+   SUBS HEADER (filters + add button)
+   ============================================ */
+.subs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block-end: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.subs-filters {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filter-btn--active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+.filter-btn__count {
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+.subs-empty-filter {
+  text-align: center;
+  color: var(--color-text-secondary);
+  padding: var(--space-10) 0;
+}
+
+/* ============================================
+   SUBS GRID
+   ============================================ */
+.subs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .subs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .subs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================
+   SUBSCRIPTION CARD
+   ============================================ */
+.sub-card {
+  position: relative;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-theme);
+}
+
+.sub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Paused card — grayscale */
+.sub-card--paused {
+  opacity: 0.7;
+  filter: grayscale(0.4);
+}
+
+.sub-card--paused:hover {
+  opacity: 0.9;
+  filter: grayscale(0);
+}
+
+/* Trial card — dashed border */
+.sub-card--trial {
+  border: 2px dashed var(--color-warning);
+}
+
+/* ============================================
+   CARD BADGE (TRIAL / PAUSED)
+   ============================================ */
+.sub-card__badge {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.sub-card__badge--trial {
+  background-color: rgba(243, 156, 18, 0.15);
+  color: var(--color-warning);
+}
+
+.sub-card__badge--paused {
+  background-color: rgba(93, 109, 126, 0.15);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   CARD HEADER
+   ============================================ */
+.sub-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-end: var(--space-4);
+  position: relative;
+}
+
+.sub-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.sub-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sub-card__name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sub-card__category {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.sub-card__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.sub-card__menu-btn:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* ============================================
+   CARD DROPDOWN
+   ============================================ */
+.sub-card__dropdown {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  min-width: 180px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  padding: var(--space-1);
+  animation: dropdown-enter 200ms ease-out;
+}
+
+.sub-card__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+  text-align: start;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.sub-card__dropdown-item:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.sub-card__dropdown-item--danger {
+  color: var(--color-danger);
+}
+
+/* ============================================
+   CARD AMOUNT
+   ============================================ */
+.sub-card__amount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  margin-block-end: var(--space-4);
+}
+
+.sub-card__price {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sub-card__cycle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   PROGRESS BAR
+   ============================================ */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-surface-hover);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-block-end: var(--space-2);
+}
+
+.progress-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 600ms ease;
+}
+
+.progress-bar__fill--green {
+  background: linear-gradient(90deg, #27AE60, #2ECC71);
+}
+
+.progress-bar__fill--yellow {
+  background: linear-gradient(90deg, #F39C12, #F1C40F);
+}
+
+.progress-bar__fill--red {
+  background: linear-gradient(90deg, #E74C3C, #FF6B6B);
+}
+
+[data-theme="dark"] .progress-bar__fill--green {
+  background: linear-gradient(90deg, #66BB6A, #81C784);
+}
+
+[data-theme="dark"] .progress-bar__fill--yellow {
+  background: linear-gradient(90deg, #FFA726, #FFB74D);
+}
+
+[data-theme="dark"] .progress-bar__fill--red {
+  background: linear-gradient(90deg, #EF5350, #FF8A80);
+}
+
+/* ============================================
+   CARD PROGRESS INFO
+   ============================================ */
+.sub-card__progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.sub-card__trial-countdown {
+  font-weight: 600;
+  color: var(--color-warning);
+}

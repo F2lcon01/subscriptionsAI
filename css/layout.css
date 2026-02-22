@@ -1,0 +1,235 @@
+/**
+ * SubTracker — Layout Styles
+ * App shell: header, sidebar, main content, bottom nav
+ * BEM naming convention
+ */
+
+/* ============================================
+   APP LAYOUT
+   ============================================ */
+.app {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.app__header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-sidebar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding-inline: var(--space-4);
+  background-color: var(--color-surface);
+  border-block-end: 1px solid var(--color-border);
+  transition: background-color var(--transition-theme), border-color var(--transition-theme);
+}
+
+.app__header-start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.app__header-end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.app__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.app__logo-icon {
+  font-size: 1.4em;
+}
+
+.app__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast);
+}
+
+.app__menu-btn:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* ============================================
+   THEME TOGGLE — Icon Visibility
+   ============================================ */
+#theme-toggle-btn .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] #theme-toggle-btn .icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] #theme-toggle-btn .icon-moon {
+  display: block;
+}
+
+/* ============================================
+   SIDEBAR (Desktop)
+   ============================================ */
+.sidebar {
+  position: fixed;
+  inset-block-start: var(--header-height);
+  inset-inline-start: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  background-color: var(--color-surface);
+  border-inline-end: 1px solid var(--color-border);
+  padding: var(--space-4);
+  z-index: var(--z-sidebar);
+  transition: transform var(--transition-slow), background-color var(--transition-theme), border-color var(--transition-theme);
+  overflow-y: auto;
+  /* Hidden on mobile by default */
+  transform: translateX(-100%);
+}
+
+[dir="rtl"] .sidebar {
+  transform: translateX(100%);
+}
+
+.sidebar--open {
+  transform: translateX(0) !important;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.sidebar__link:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.sidebar__link--active {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .sidebar__link--active {
+  background-color: rgba(52, 152, 219, 0.15);
+}
+
+.sidebar__link svg {
+  flex-shrink: 0;
+}
+
+/* Sidebar Overlay (Mobile) */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-sidebar) - 1);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.sidebar-overlay--visible {
+  opacity: 1;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.app__main {
+  padding: var(--space-6);
+  padding-block-end: calc(var(--bottom-nav-height) + var(--space-6));
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin-inline: auto;
+  transition: padding var(--transition-slow);
+}
+
+/* ============================================
+   PAGE
+   ============================================ */
+.page__header {
+  margin-block-end: var(--space-6);
+}
+
+.page__title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   BOTTOM NAVIGATION (Mobile)
+   ============================================ */
+.bottom-nav {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: var(--bottom-nav-height);
+  background-color: var(--color-surface);
+  border-block-start: 1px solid var(--color-border);
+  z-index: var(--z-sidebar);
+  padding-block-end: env(safe-area-inset-bottom, 0px);
+  transition: background-color var(--transition-theme), border-color var(--transition-theme);
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+  min-width: 64px;
+  min-height: 44px;
+}
+
+.bottom-nav__item--active {
+  color: var(--color-primary);
+}
+
+.bottom-nav__item:hover {
+  color: var(--color-text-primary);
+}
+
+.bottom-nav__item svg {
+  flex-shrink: 0;
+}
