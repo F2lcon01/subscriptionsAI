@@ -1,6 +1,6 @@
 /**
- * SubTracker — Subscription Page Styles
- * Cards, progress bars, filters, card dropdown
+ * اشتراكاتي — Subscription Page Styles
+ * Cards with accent bars, progress bars, filters, card dropdown
  */
 
 /* ============================================
@@ -37,14 +37,14 @@
 }
 
 .filter-btn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .filter-btn--active {
-  background-color: var(--color-primary);
+  background: var(--gradient-primary);
   color: #FFFFFF;
-  border-color: var(--color-primary);
+  border-color: transparent;
 }
 
 .filter-btn__count {
@@ -89,13 +89,40 @@
   box-shadow: var(--shadow-sm);
   padding: var(--space-5);
   cursor: pointer;
-  transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-theme);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 300ms ease,
+              background-color var(--transition-theme);
+  overflow: hidden;
+}
+
+/* Gradient top accent bar */
+.sub-card::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: height 200ms ease;
 }
 
 .sub-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.01);
   box-shadow: var(--shadow-hover);
 }
+
+.sub-card:hover::before {
+  height: 5px;
+}
+
+/* Category-specific accent bars */
+.sub-card[data-category="entertainment"]::before { background: var(--color-cat-entertainment); }
+.sub-card[data-category="work"]::before { background: var(--color-cat-work); }
+.sub-card[data-category="education"]::before { background: var(--color-cat-education); }
+.sub-card[data-category="social"]::before { background: var(--color-cat-social); }
+.sub-card[data-category="other"]::before { background: var(--color-cat-other); }
 
 /* Paused card — grayscale */
 .sub-card--paused {
@@ -129,12 +156,12 @@
 }
 
 .sub-card__badge--trial {
-  background-color: rgba(243, 156, 18, 0.15);
+  background-color: rgba(245, 158, 11, 0.15);
   color: var(--color-warning);
 }
 
 .sub-card__badge--paused {
-  background-color: rgba(93, 109, 126, 0.15);
+  background-color: rgba(107, 114, 128, 0.15);
   color: var(--color-text-secondary);
 }
 
@@ -150,14 +177,19 @@
 }
 
 .sub-card__icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   flex-shrink: 0;
+  transition: transform 200ms ease;
+}
+
+.sub-card:hover .sub-card__icon {
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .sub-card__info {
@@ -276,27 +308,27 @@
 }
 
 .progress-bar__fill--green {
-  background: linear-gradient(90deg, #27AE60, #2ECC71);
+  background: linear-gradient(90deg, #10B981, #6EE7B7);
 }
 
 .progress-bar__fill--yellow {
-  background: linear-gradient(90deg, #F39C12, #F1C40F);
+  background: linear-gradient(90deg, #F59E0B, #FCD34D);
 }
 
 .progress-bar__fill--red {
-  background: linear-gradient(90deg, #E74C3C, #FF6B6B);
+  background: linear-gradient(90deg, #EF4444, #FCA5A5);
 }
 
 [data-theme="dark"] .progress-bar__fill--green {
-  background: linear-gradient(90deg, #66BB6A, #81C784);
+  background: linear-gradient(90deg, #34D399, #6EE7B7);
 }
 
 [data-theme="dark"] .progress-bar__fill--yellow {
-  background: linear-gradient(90deg, #FFA726, #FFB74D);
+  background: linear-gradient(90deg, #FBBF24, #FCD34D);
 }
 
 [data-theme="dark"] .progress-bar__fill--red {
-  background: linear-gradient(90deg, #EF5350, #FF8A80);
+  background: linear-gradient(90deg, #F87171, #FCA5A5);
 }
 
 /* ============================================

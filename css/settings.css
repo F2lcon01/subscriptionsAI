@@ -97,12 +97,13 @@
 }
 
 .settings__segment-btn--active {
-  background-color: var(--color-primary);
+  background: var(--gradient-primary);
   color: #FFFFFF;
 }
 
 .settings__segment-btn--active:hover {
-  background-color: var(--color-secondary);
+  background: var(--gradient-primary);
+  opacity: 0.9;
   color: #FFFFFF;
 }
 

@@ -1,5 +1,5 @@
 /**
- * SubTracker — Component Styles
+ * اشتراكاتي — Component Styles
  * Buttons, inputs, cards, dropdowns, toasts, loading, empty states
  * BEM naming convention throughout
  */
@@ -22,21 +22,35 @@
   cursor: pointer;
   border: 2px solid transparent;
   line-height: 1;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  animation: btn-press 200ms ease;
 }
 
-/* Primary */
+/* Ripple effect (added via JS) */
+.btn__ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  animation: ripple-expand 600ms ease-out forwards;
+}
+
+/* Primary — Gradient */
 .btn--primary {
-  background-color: var(--color-primary);
+  background: var(--gradient-primary);
+  background-size: 200% 200%;
   color: #FFFFFF;
+  transition: all 200ms ease, background-position 300ms ease;
 }
 
 .btn--primary:hover {
-  background-color: var(--color-secondary);
-  box-shadow: var(--shadow-md);
+  background-position: 100% 50%;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Secondary (Outlined) */
@@ -70,7 +84,8 @@
 
 .btn--danger:hover {
   opacity: 0.9;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Full width */
@@ -108,6 +123,7 @@
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  animation: none;
 }
 
 /* ============================================
@@ -145,8 +161,8 @@
 }
 
 .form-group__input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
 }
 
 /* Input with icon */
@@ -311,8 +327,10 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  animation: toast-enter 250ms ease-out;
+  animation: toast-enter 350ms cubic-bezier(0.16, 1, 0.3, 1);
   border-inline-start: 4px solid var(--color-accent);
+  position: relative;
+  overflow: hidden;
 }
 
 .toast--success {
@@ -325,6 +343,33 @@
 
 .toast--warning {
   border-inline-start-color: var(--color-warning);
+}
+
+/* Toast icon container */
+.toast__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.toast--success .toast__icon {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--color-success);
+}
+
+.toast--error .toast__icon {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--color-danger);
+}
+
+.toast--warning .toast__icon {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--color-warning);
 }
 
 .toast__message {
@@ -346,6 +391,28 @@
 
 .toast__close:hover {
   background-color: var(--color-surface-hover);
+}
+
+/* Toast auto-dismiss progress bar */
+.toast__progress {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  height: 3px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  animation: toast-progress 4000ms linear forwards;
+}
+
+.toast--success .toast__progress {
+  background: var(--color-success);
+}
+
+.toast--error .toast__progress {
+  background: var(--color-danger);
+}
+
+.toast--warning .toast__progress {
+  background: var(--color-warning);
 }
 
 .toast--exit {
@@ -371,13 +438,30 @@
   pointer-events: none;
 }
 
+/* 3-dot bounce loader */
 .loading-overlay__spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border);
-  border-block-start-color: var(--color-primary);
+  display: flex;
+  gap: var(--space-2);
+}
+
+.loading-overlay__dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  background: var(--color-primary);
+  animation: dot-bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-overlay__dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-overlay__dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loading-overlay__dot:nth-child(3) {
+  animation-delay: 0s;
 }
 
 /* ============================================
@@ -427,5 +511,5 @@
   content: '';
   flex: 1;
   height: 1px;
-  background-color: var(--color-border);
+  background: linear-gradient(to right, transparent, var(--color-border), transparent);
 }

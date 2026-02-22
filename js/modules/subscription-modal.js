@@ -430,7 +430,7 @@ const SubscriptionModal = (function() {
       totalCost: parseFloat(amount),
       yourShare: (subscriptionType !== 'individual' && yourShare) ? parseFloat(yourShare) : parseFloat(amount),
       icon: _selectedService ? _selectedService.icon : _getCategoryIcon(category),
-      color: _selectedService ? _selectedService.color : '#3498DB',
+      color: _selectedService ? _selectedService.color : '#7C3AED',
       credentials: { username: credUser, password: credPass }
     };
 
@@ -441,6 +441,7 @@ const SubscriptionModal = (function() {
       } else {
         await SubscriptionService.add(data);
         Toast.success(I18n.t('subscription.added'));
+        App.celebrateSuccess();
       }
       close();
     } catch(err) {

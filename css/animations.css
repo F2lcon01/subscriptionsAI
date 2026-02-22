@@ -1,92 +1,17 @@
 /**
- * SubTracker — Animations
+ * اشتراكاتي — Animations
  * CSS Transitions + Keyframes only (no libraries)
- * Based on PRD Section 7.5 Micro-Animations
+ * Cheerful, playful micro-interactions
  */
 
 /* ============================================
-   KEYFRAMES
+   KEYFRAMES — Core
    ============================================ */
 
-/* Spinner */
+/* Spinner (legacy fallback) */
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* Toast enter from top-right */
-@keyframes toast-enter {
-  from {
-    opacity: 0;
-    transform: translateX(100%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-[dir="rtl"] .toast {
-  animation-name: toast-enter-rtl;
-}
-
-@keyframes toast-enter-rtl {
-  from {
-    opacity: 0;
-    transform: translateX(-100%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-/* Toast exit */
-@keyframes toast-exit {
-  from {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%) scale(0.8);
-  }
-}
-
-/* Dropdown enter */
-@keyframes dropdown-enter {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Page fade-in */
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Slide up (for modals) */
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -104,12 +29,245 @@
 
 /* Shimmer for skeleton loading */
 @keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================
+   KEYFRAMES — Page & Card Entrance
+   ============================================ */
+
+/* Page enter — smooth with blur */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Staggered card entrance */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Bounce in (success states, logos) */
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Slide up (legacy modal) */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   KEYFRAMES — Modal
+   ============================================ */
+
+/* Modal enter — spring-like */
+@keyframes modal-spring {
   0% {
-    background-position: -200% 0;
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.01);
   }
   100% {
-    background-position: 200% 0;
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
+}
+
+/* Modal exit */
+@keyframes modal-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+/* ============================================
+   KEYFRAMES — Toast
+   ============================================ */
+
+/* Toast enter with bounce */
+@keyframes toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-5%) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+[dir="rtl"] .toast {
+  animation-name: toast-enter-rtl;
+}
+
+@keyframes toast-enter-rtl {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(5%) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Toast exit */
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.8);
+  }
+}
+
+/* Toast auto-dismiss progress bar */
+@keyframes toast-progress {
+  from { width: 100%; }
+  to { width: 0; }
+}
+
+/* ============================================
+   KEYFRAMES — Buttons & Interactions
+   ============================================ */
+
+/* Button press (satisfying tactile feedback) */
+@keyframes btn-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+/* Ripple effect */
+@keyframes ripple-expand {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Pulse glow (hover highlights) */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+  50% { box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.1); }
+}
+
+/* ============================================
+   KEYFRAMES — Decorative & Ambient
+   ============================================ */
+
+/* Float (decorative elements) */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+/* Counter pop (stat numbers) */
+@keyframes counter-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Confetti fall */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   KEYFRAMES — Loading
+   ============================================ */
+
+/* 3-dot bounce loader */
+@keyframes dot-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Dropdown enter */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Progress bar fill */
+@keyframes progress-fill {
+  from { width: 0; }
+}
+
+/* Progress bar shine */
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
 }
 
 /* ============================================
@@ -118,8 +276,25 @@
 
 /* Page transition */
 .page--enter {
-  animation: page-enter 200ms ease-out;
+  animation: page-enter 350ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Card entrance with stagger */
+.card-animate {
+  opacity: 0;
+  animation: card-enter 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger delay classes */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 180ms; }
+.stagger-5 { animation-delay: 240ms; }
+.stagger-6 { animation-delay: 300ms; }
+.stagger-7 { animation-delay: 360ms; }
+.stagger-8 { animation-delay: 420ms; }
+.stagger-9 { animation-delay: 480ms; }
 
 /* Skeleton loading shimmer */
 .skeleton {

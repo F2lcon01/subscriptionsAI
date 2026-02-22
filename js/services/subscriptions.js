@@ -119,7 +119,7 @@ const SubscriptionService = (function() {
       nextRenewalDate: _calculateNextRenewal(data.startDate, data.billingCycle),
       category: data.category || 'other',
       icon: data.icon || '📦',
-      color: data.color || '#3498DB',
+      color: data.color || '#7C3AED',
       status: data.isTrial ? 'trial' : 'active',
       isTrial: data.isTrial || false,
       trialEndDate: data.trialEndDate || null,

@@ -28,6 +28,12 @@ const SubscriptionList = (function() {
     container.innerHTML = _listHTML(subs);
     I18n.translatePage();
     _bindListEvents();
+
+    // Stagger card entrance animations
+    var cards = container.querySelectorAll('.sub-card');
+    cards.forEach(function(card, index) {
+      card.classList.add('card-animate', 'stagger-' + Math.min(index + 1, 9));
+    });
   }
 
   function _emptyStateHTML() {
@@ -100,14 +106,14 @@ const SubscriptionList = (function() {
     var cycleLabel = I18n.t('cycle.' + (sub.billingCycle || 'monthly')) || sub.billingCycle;
 
     return '' +
-      '<div class="sub-card ' + (isPaused ? 'sub-card--paused' : '') + ' ' + (isTrial ? 'sub-card--trial' : '') + '" data-sub-id="' + sub.id + '">' +
+      '<div class="sub-card ' + (isPaused ? 'sub-card--paused' : '') + ' ' + (isTrial ? 'sub-card--trial' : '') + '" data-sub-id="' + sub.id + '" data-category="' + (sub.category || 'other') + '">' +
         // Status badge
         (isTrial ? '<span class="sub-card__badge sub-card__badge--trial" data-i18n="subscription.trial_badge">TRIAL</span>' : '') +
         (isPaused ? '<span class="sub-card__badge sub-card__badge--paused" data-i18n="subscription.paused_badge">PAUSED</span>' : '') +
 
         // Card header: icon + name + actions
         '<div class="sub-card__header">' +
-          '<div class="sub-card__icon" style="background:' + (sub.color || '#3498DB') + '">' +
+          '<div class="sub-card__icon" style="background:' + (sub.color || '#7C3AED') + '">' +
             '<span>' + (sub.icon || '📦') + '</span>' +
           '</div>' +
           '<div class="sub-card__info">' +

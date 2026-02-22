@@ -112,7 +112,7 @@ const Theme = (function() {
     // Update meta theme-color for browser chrome
     var metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#121212' : '#1B4F72');
+      metaTheme.setAttribute('content', theme === 'dark' ? '#0F0B1A' : '#7C3AED');
     }
   }
 

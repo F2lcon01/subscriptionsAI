@@ -26,6 +26,15 @@ const Dashboard = (function() {
 
     container.innerHTML = _dashboardHTML(stats);
     I18n.translatePage();
+
+    // Stagger stat card animations
+    var statCards = container.querySelectorAll('.stat-card');
+    statCards.forEach(function(card, index) {
+      card.classList.add('card-animate', 'stagger-' + Math.min(index + 1, 9));
+    });
+
+    // Animate number counters
+    _animateCounters();
   }
 
   function _emptyStateHTML() {
@@ -84,7 +93,7 @@ const Dashboard = (function() {
       '<div class="stat-card stat-card--' + type + '">' +
         '<div class="stat-card__icon">' + icon + '</div>' +
         '<div class="stat-card__content">' +
-          '<span class="stat-card__value">' + value + '</span>' +
+          '<span class="stat-card__value" data-counter>' + value + '</span>' +
           '<span class="stat-card__label" data-i18n="' + i18nKey + '"></span>' +
         '</div>' +
       '</div>';
@@ -97,7 +106,7 @@ const Dashboard = (function() {
       var color = SubscriptionService.getProgressColor(days);
       html += '' +
         '<div class="upcoming-item">' +
-          '<div class="upcoming-item__icon" style="background:' + (sub.color || '#3498DB') + '">' +
+          '<div class="upcoming-item__icon" style="background:' + (sub.color || '#7C3AED') + '">' +
             '<span>' + (sub.icon || '📦') + '</span>' +
           '</div>' +
           '<div class="upcoming-item__info">' +
@@ -129,7 +138,7 @@ const Dashboard = (function() {
         '</div>' +
         '<div class="dashboard-section__body">' +
           '<div class="most-expensive">' +
-            '<span class="most-expensive__icon" style="background:' + (sub.color || '#3498DB') + '">' + (sub.icon || '📦') + '</span>' +
+            '<span class="most-expensive__icon" style="background:' + (sub.color || '#7C3AED') + '">' + (sub.icon || '📦') + '</span>' +
             '<span class="most-expensive__name">' + _escapeHTML(sub.name) + '</span>' +
             '<span class="most-expensive__amount">' + _formatCurrency(monthly, currency) + '<small>/' + I18n.t('common.month') + '</small></span>' +
           '</div>' +
@@ -209,6 +218,36 @@ const Dashboard = (function() {
     var div = document.createElement('div');
     div.textContent = str || '';
     return div.innerHTML;
+  }
+
+  function _animateCounters() {
+    var counters = document.querySelectorAll('[data-counter]');
+    counters.forEach(function(el) {
+      var text = el.textContent;
+      var match = text.match(/[\d,.]+/);
+      if (!match) return;
+      var target = parseFloat(match[0].replace(/,/g, ''));
+      if (isNaN(target) || target === 0) return;
+
+      var prefix = text.substring(0, text.indexOf(match[0]));
+      var suffix = text.substring(text.indexOf(match[0]) + match[0].length);
+      var hasDecimal = match[0].includes('.');
+      var duration = 800;
+      var start = performance.now();
+
+      function tick(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = target * eased;
+        var formatted = hasDecimal
+          ? current.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+          : Math.round(current).toLocaleString();
+        el.textContent = prefix + formatted + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
   }
 
   function _bindEmptyStateEvents() {

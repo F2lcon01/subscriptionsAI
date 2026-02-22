@@ -1,6 +1,6 @@
 /**
- * SubTracker — Dashboard Styles
- * Stats cards, upcoming list, category breakdown
+ * اشتراكاتي — Dashboard Styles
+ * Stats cards with gradients, upcoming list, category breakdown
  */
 
 /* ============================================
@@ -20,26 +20,54 @@
 }
 
 /* ============================================
-   STAT CARD
+   STAT CARD — Gradient Backgrounds
    ============================================ */
 .stat-card {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   padding: var(--space-5);
-  background-color: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-theme);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
+  position: relative;
+  overflow: hidden;
+  color: #FFFFFF;
+}
+
+/* Each stat type gets its own gradient */
+.stat-card--monthly { background: var(--gradient-stat-monthly); }
+.stat-card--yearly  { background: var(--gradient-stat-yearly); }
+.stat-card--active  { background: var(--gradient-stat-active); }
+.stat-card--trial   { background: var(--gradient-stat-trial); }
+
+/* Decorative circle in background */
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: -20px;
+  inset-block-end: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
 
 .stat-card__icon {
-  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 1.5rem;
   flex-shrink: 0;
 }
 
@@ -52,7 +80,7 @@
 .stat-card__value {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: inherit;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -61,7 +89,7 @@
 
 .stat-card__label {
   font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.85);
   margin-block-start: var(--space-1);
 }
 
@@ -83,6 +111,11 @@
   justify-content: space-between;
   padding: var(--space-4) var(--space-5);
   border-block-end: 1px solid var(--color-border);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.03), rgba(20, 184, 166, 0.03));
+}
+
+[data-theme="dark"] .dashboard-section__header {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.05), rgba(94, 234, 212, 0.03));
 }
 
 .dashboard-section__title {
@@ -98,7 +131,7 @@
   min-width: 24px;
   height: 24px;
   padding: 0 var(--space-2);
-  background-color: var(--color-accent);
+  background: var(--gradient-primary);
   color: #FFFFFF;
   font-size: var(--font-size-xs);
   font-weight: 600;

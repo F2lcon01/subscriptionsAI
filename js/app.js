@@ -162,6 +162,21 @@ const App = (function() {
       });
     }
 
+    // Button ripple effect
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.btn--primary, .btn--secondary');
+      if (!btn || btn.disabled) return;
+      var ripple = document.createElement('span');
+      ripple.className = 'btn__ripple';
+      var rect = btn.getBoundingClientRect();
+      var size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(function() { ripple.remove(); }, 600);
+    });
+
     // Close sidebar on window resize to desktop
     window.addEventListener('resize', function() {
       if (window.innerWidth >= 768 && sidebar) {
@@ -209,10 +224,32 @@ const App = (function() {
     }, 300);
   }
 
+  /**
+   * Confetti celebration effect for successful actions
+   */
+  function celebrateSuccess() {
+    var container = document.createElement('div');
+    container.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;';
+    var colors = ['#7C3AED', '#14B8A6', '#F97316', '#EC4899', '#FBBF24', '#10B981'];
+    for (var i = 0; i < 30; i++) {
+      var piece = document.createElement('div');
+      piece.style.cssText =
+        'position:absolute;width:8px;height:8px;border-radius:2px;' +
+        'background:' + colors[i % colors.length] + ';' +
+        'left:' + (Math.random() * 100) + '%;' +
+        'animation:confetti-fall ' + (1 + Math.random()) + 's ease-out forwards;' +
+        'animation-delay:' + (Math.random() * 0.3) + 's;';
+      container.appendChild(piece);
+    }
+    document.body.appendChild(container);
+    setTimeout(function() { container.remove(); }, 2500);
+  }
+
   return {
     init: init,
     onAppReady: onAppReady,
-    onAppDestroy: onAppDestroy
+    onAppDestroy: onAppDestroy,
+    celebrateSuccess: celebrateSuccess
   };
 })();
 
