@@ -11,7 +11,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:f2lcon01.github.io)"
+      "WebFetch(domain:f2lcon01.github.io)",
+      "Bash(test:*)",
+      "Bash(wc:*)"
     ]
   }
 }
